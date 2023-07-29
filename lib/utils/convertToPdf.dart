@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/widgets.dart';
+import 'package:provider/provider.dart';
 
 Future<String?> convertToPdf(String text) async {
+  // final ProviderImageFile = Provider.of(context);
   final pdf = Document();
   int index = 0;
   pdf.addPage(Page(
@@ -19,9 +21,7 @@ Future<String?> convertToPdf(String text) async {
   index++;
   final bytes = await pdf.save();
   final name = 'pdfFile $index';
-  print('dir - ${dir.path}, name - $name');
   final file = File('${dir.path}/$name.pdf');
-  print(file);
   await file.writeAsBytes(bytes);
   return file.path;
 }

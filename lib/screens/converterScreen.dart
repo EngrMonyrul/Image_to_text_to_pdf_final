@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
+import 'package:imagetopdf/providers/imageProvider.dart';
 import 'package:imagetopdf/screens/mainScreen.dart';
 import 'package:imagetopdf/screens/showPdf.dart';
 import 'package:imagetopdf/utils/convertToPdf.dart';
+import 'package:provider/provider.dart';
 import 'package:quickalert/quickalert.dart';
 
 class TextConverter extends StatefulWidget {

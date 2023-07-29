@@ -42,6 +42,7 @@ dependencies:
   pdf: ^3.10.4
   syncfusion_flutter_pdfviewer: ^22.1.39
   quickalert: ^1.0.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

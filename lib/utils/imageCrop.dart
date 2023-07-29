@@ -1,7 +1,15 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:imagetopdf/providers/imageProvider.dart';
+import 'package:provider/provider.dart';
 
-Future<String> imageCropperSystem({BuildContext? context, String? path}) async {
+Future<String> imageCropperSystem({BuildContext? context, String? path, int? index}) async {
+  final imageListProvider =
+      Provider.of<AppsImageProvider>(context!, listen: false);
+
   CroppedFile? croppedFile =
       await ImageCropper().cropImage(sourcePath: path!, aspectRatioPresets: [
     CropAspectRatioPreset.square,
@@ -23,9 +31,14 @@ Future<String> imageCropperSystem({BuildContext? context, String? path}) async {
       title: 'Crop Image',
     ),
     WebUiSettings(
-      context: context!,
+      context: context,
     ),
   ]);
 
-  return croppedFile!.path;
+  Uint8List imagefile;
+  File file = File(croppedFile!.path);
+  imagefile = await file.readAsBytes();
+  imageListProvider.setImage(imagefile, index);
+
+  return croppedFile.path;
 }
